@@ -1,2 +1,2 @@
 # laserTank
-world of tanks (limited hardware edition)
+Armored Warfare (limited hardware edition)
