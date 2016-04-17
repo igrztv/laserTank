@@ -22,7 +22,6 @@ public class App extends Application {
         @Override
         public void onVKAccessTokenChanged(VKAccessToken oldToken, VKAccessToken newToken) {
             if (newToken == null) {
-                VKAccessToken.removeTokenAtKey(getApplicationContext(), "login_vk_token");
                 SharedPreferences loginSettings = getSharedPreferences("login_vk", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = loginSettings.edit();
                 editor.clear();

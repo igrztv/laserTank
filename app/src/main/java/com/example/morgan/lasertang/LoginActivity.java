@@ -18,7 +18,6 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.vk.sdk.VKAccessToken;
@@ -117,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
         VKCallback<VKAccessToken> callback = new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                res.saveTokenToSharedPreferences(getApplicationContext(), LOGIN_SHARED_PREFERENCES + "vk_token");
+                res.save();
                 if (vkUserRequest != null) {
                     return;
                 }
@@ -199,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToPlayView() {
-        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+        Intent intent = new Intent(LoginActivity.this, InviteActivity.class); //TODO: return SearchActivity.class);
         startActivity(intent);
     }
 
