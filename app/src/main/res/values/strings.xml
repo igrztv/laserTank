@@ -86,5 +86,14 @@
     <string name="title_activity_menu">MenuActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
+
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="facebook_app_id">1211618285547221</string>
+    <integer name="com_vk_sdk_AppId">5419695</integer>
+    <string name="login">Login</string>
+    <string name="or">or</string>
+    <string name="play_anon">PLAY NOW</string>
+    <string name="invite_friends">INVITE FRIENDS</string>
+    <string name="hello_world">Hello world!</string>
 </resources>
