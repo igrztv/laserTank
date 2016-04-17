@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -46,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ImageButton vk_button = (ImageButton) findViewById(R.id.login_vk);
-        ImageButton fb_button = (ImageButton) findViewById(R.id.login_fb);
+        Button vk_button = (Button) findViewById(R.id.login_vk);
+        Button fb_button = (Button) findViewById(R.id.login_fb);
         Button play_button = (Button) findViewById(R.id.play_without_login);
 
         vk_button.setOnClickListener(loginWithVk);

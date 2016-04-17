@@ -1,19 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <View
-            android:layout_height = "1dp"
-            android:layout_width="match_parent"
-            android:layout_weight="1"/>
+        android:layout_alignParentStart="true"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:gravity="center">
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
@@ -21,63 +14,58 @@
             android:layout_weight="1"
             android:text="@string/login"
             android:gravity="center"
-            android:textColor="@color/base_layout_color_dark"
+            android:background="@color/base_layout_color"
+            android:fontFamily="monospace"
+            android:textColor="#fff"
             android:textSize="@dimen/login_text_size"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <View
+            android:layout_height = "1dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1">
-            <View
-                android:layout_height = "match_parent"
-                android:layout_width="1dp"
-                android:layout_weight="1"/>
+            android:layout_weight="1"/>
 
-            <ImageButton
-                android:id="@+id/login_vk"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="1dip"
-                android:layout_marginRight="1dip"
-                android:background="#fff"
-                android:src="@mipmap/vk_icon" >
-            </ImageButton>
-
-            <ImageButton
-                android:id="@+id/login_fb"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#fff"
-                android:src="@mipmap/fb_icon"
-                android:layout_marginLeft="1dip">
-            </ImageButton>
-            <View
-                android:layout_height = "match_parent"
-                android:layout_width="1dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="1"
-            android:text="@string/or"
+        <Button
+            android:layout_marginBottom="10dp"
+            android:id="@+id/login_vk"
+            android:layout_width="@dimen/button_width"
             android:gravity="center"
-            android:textColor="@color/base_layout_color_dark"
-            android:textSize="@dimen/login_text_size"/>
+            android:layout_height="70dp"
+            android:text="Вконтакте"
+            android:background="@drawable/vk_1"
+            android:textColor="#fff"
+            android:paddingLeft="30dp"
+            android:textSize="@dimen/button_text_size"
+            android:layout_marginLeft="1dip">
+        </Button>
+
+
+        <Button
+            android:id="@+id/login_fb"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="70dp"
+            android:textColor="#fff"
+            android:text="facebook"
+            android:textSize="@dimen/button_text_size"
+            android:background="@drawable/fb_1"
+            android:paddingLeft="30dp"
+            android:layout_marginLeft="1dip"
+            android:layout_marginTop="10dp"
+            android:maxHeight="20dp">
+        </Button>
+
+        <View
+            android:layout_height = "1dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"/>
 
         <Button
             android:id="@+id/play_without_login"
-            android:layout_height="1dp"
-            android:layout_width="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="70dp"
+            android:layout_width="@dimen/button_width"
             android:text="@string/play_anon"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/login_button_text_color"
-            android:background="@color/base_layout_color"
+            android:background="#8bc34a"
             android:padding="5dp"
             android:textSize="@dimen/login_play_text_size"/>
 
@@ -86,4 +74,3 @@
             android:layout_width="match_parent"
             android:layout_weight="1"/>
     </LinearLayout>
-</RelativeLayout>

@@ -94,6 +94,6 @@
     <string name="login">Login</string>
     <string name="or">or</string>
     <string name="play_anon">PLAY NOW</string>
-    <string name="invite_friends">Invite friends</string>
+    <string name="invite_friends">INVITE FRIENDS</string>
     <string name="hello_world">Hello world!</string>
 </resources>

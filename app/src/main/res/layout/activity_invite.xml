@@ -1,61 +1,57 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
+    <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_weight="1"
             android:text="@string/invite_friends"
             android:gravity="center"
-            android:textColor="@color/base_layout_color_dark"
+            android:background="@color/base_layout_color"
+            android:fontFamily="monospace"
+            android:textColor="#fff"
             android:textSize="@dimen/login_text_size"/>
+    <View
+        android:layout_height = "1dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"/>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_weight="2">
-            <View
-                android:layout_height = "match_parent"
-                android:layout_width="1dp"
-                android:layout_weight="1"/>
+    <Button
+        android:id="@+id/invite_vk"
+        android:layout_width="@dimen/button_width"
+        android:gravity="center"
+        android:layout_height="70dp"
+        android:text="Вконтакте"
+        android:background="@drawable/vk_1"
+        android:textColor="#fff"
+        android:paddingLeft="30dp"
+        android:textSize="@dimen/button_text_size"
+        android:layout_marginLeft="1dip">
+    </Button>
+    <View
+        android:layout_height = "1dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"/>
 
-            <ImageButton
-                android:id="@+id/invite_vk"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:layout_marginLeft="1dip"
-                android:layout_marginRight="1dip"
-                android:background="#fff"
-                android:src="@mipmap/vk_icon" >
-            </ImageButton>
-
-            <ImageButton
-                android:id="@+id/invite_fb"
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="#fff"
-                android:src="@mipmap/fb_icon"
-                android:layout_marginLeft="1dip">
-            </ImageButton>
-            <View
-                android:layout_height = "match_parent"
-                android:layout_width="1dp"
-                android:layout_weight="1"/>
-        </LinearLayout>
+    <Button
+        android:id="@+id/invite_fb"
+        android:layout_width="@dimen/button_width"
+        android:layout_height="70dp"
+        android:textColor="#fff"
+        android:text="facebook"
+        android:textSize="@dimen/button_text_size"
+        android:background="@drawable/fb_1"
+        android:paddingLeft="30dp"
+        android:layout_marginLeft="1dip">
+    </Button>
 
 
         <View
@@ -63,4 +59,4 @@
             android:layout_width="match_parent"
             android:layout_weight="1"/>
     </LinearLayout>
-</RelativeLayout>
+

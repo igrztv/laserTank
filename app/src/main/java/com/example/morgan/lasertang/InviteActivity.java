@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -51,8 +51,8 @@ public class InviteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
 
-        ImageButton vk_button = (ImageButton) findViewById(R.id.invite_vk);
-        ImageButton fb_button = (ImageButton) findViewById(R.id.invite_fb);
+        Button vk_button = (Button) findViewById(R.id.invite_vk);
+        Button fb_button = (Button) findViewById(R.id.invite_fb);
 
         vk_button.setOnClickListener(inviteWithVk);
         fb_button.setOnClickListener(inviteWithFb);
