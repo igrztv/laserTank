@@ -197,7 +197,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToPlayView() {
-        Intent intent = new Intent(LoginActivity.this, InviteActivity.class); //TODO: return SearchActivity.class);
+        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
         startActivity(intent);
     }
 
