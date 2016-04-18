@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">LaserTang</string>
-    <string name="shoot_btn">SHOOT</string>
+    <string name="shoot_btn">FIRE</string>
     <string name="move_btn"> </string>
     <string name="seekBar"></string>
 
