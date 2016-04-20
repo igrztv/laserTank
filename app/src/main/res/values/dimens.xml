@@ -4,6 +4,8 @@
     <dimen name="activity_vertical_margin">0dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="store_margin_left">10dp</dimen>
+    <dimen name="store_margin_right">10dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
@@ -11,4 +13,8 @@
     <dimen name="login_play_text_size">30sp</dimen>
     <dimen name="button_text_size">25sp</dimen>
     <dimen name="button_width">300dp</dimen>
+    <dimen name="store_header_size">20sp</dimen>
+    <dimen name="store_header_padding_left">50dp</dimen>
+    <dimen name="store_text_size">15sp</dimen>
+    <dimen name="store_comment_size">13sp</dimen>
 </resources>
