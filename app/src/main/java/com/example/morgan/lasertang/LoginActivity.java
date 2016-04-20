@@ -147,8 +147,6 @@ public class LoginActivity extends AppCompatActivity {
                             Map<String, String> userInfo = userToHash(object);
                             saveLoginInfo("fb", userInfo);
                             //access token is managed by fb class
-
-
                         } catch (JSONException e) {
                             //DO NOTHING: info is not  necessary
                         }
