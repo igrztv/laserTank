@@ -1,0 +1,51 @@
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/store_item"
+android:layout_marginLeft="@dimen/store_margin_left"
+android:layout_marginRight="@dimen/store_margin_right"
+android:layout_marginTop="10dp"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/store_text_container"
+        android:layout_toRightOf="@+id/store_item_img"
+        android:layout_marginLeft="@dimen/store_margin_left"
+        android:layout_marginRight="@dimen/store_margin_right"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:background="?android:attr/activatedBackgroundIndicator"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/store_item_text"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:fontFamily="monospace"
+            android:textSize="@dimen/store_text_size" />
+        <TextView
+            android:id="@+id/store_item_comment"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:fontFamily="monospace"
+            android:textColor="@color/comment_grey_color"
+            android:textSize="@dimen/store_comment_size"
+            android:layout_below="@+id/store_item_text"/>
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/store_item_img"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        />
+
+</RelativeLayout>
