@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,9 +19,53 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class StoreActivity extends AppCompatActivity {
+    final String[] motor_item = new String[] {
+            "Рыжик", "Барсик", "Мурзик", "Мурка"
+    };
+    final String[] motor_comment = new String[] {
+            "Васька", "Томасина", "Пушок", "Дымка"
+    };
+    Integer[] motor_img={
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+    };
+
+    final String[] armor_item = new String[] {
+            "Васька", "Томасина", "Пушок", "Дымка"
+    };
+    final String[] armor_comment = new String[] {
+            "Кузя", "Китти", "Масяня", "Симба"
+    };
+    Integer[] armor_img={
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+    };
+
+
+    final String[] weapon_item = new String[] {
+            "Кузя", "Китти", "Масяня", "Симба"
+    };
+    final String[] weapon_comment = new String[] {
+            "Рыжик", "Барсик", "Мурзик", "Мурка"
+    };
+    Integer[] weapon_img = {
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+    };
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -30,7 +76,7 @@ public class StoreActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    private CustomListAdapter adapter;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -43,28 +89,48 @@ public class StoreActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        ListView listView = (ListView)findViewById(R.id.listView1);
+        adapter=new CustomListAdapter(this, motor_item, motor_comment, motor_img);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+
             }
         });
-
+        TextView motor = (TextView) findViewById(R.id.StoreMotor);
+        TextView armot = (TextView) findViewById(R.id.StoreArmor);
+        TextView weapon = (TextView) findViewById(R.id.StoreWeapon);
+        motor.setOnClickListener(motorCategory);
+        armot.setOnClickListener(armorCategory);
+        weapon.setOnClickListener(weaponCategory);
     }
 
+    View.OnClickListener motorCategory = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            adapter.setData(motor_item,motor_comment,motor_img);
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    View.OnClickListener armorCategory = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            adapter.setData(armor_item,armor_comment,armor_img);
+            adapter.notifyDataSetChanged();
+        }
+    };
+
+    View.OnClickListener weaponCategory = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            adapter.setData(weapon_item,weapon_comment,weapon_img);
+            adapter.notifyDataSetChanged();
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
