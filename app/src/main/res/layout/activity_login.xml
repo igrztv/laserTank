@@ -31,9 +31,8 @@
             android:gravity="center"
             android:layout_height="70dp"
             android:text="Вконтакте"
-            android:background="@drawable/vk_1"
+            android:drawableLeft="@drawable/vk_2"
             android:textColor="#fff"
-            android:paddingLeft="30dp"
             android:textSize="@dimen/button_text_size"
             android:layout_marginLeft="1dip">
         </Button>
@@ -44,10 +43,9 @@
             android:layout_width="@dimen/button_width"
             android:layout_height="70dp"
             android:textColor="#fff"
-            android:text="facebook"
+            android:text="Facebook"
             android:textSize="@dimen/button_text_size"
-            android:background="@drawable/fb_1"
-            android:paddingLeft="30dp"
+            android:drawableLeft="@drawable/fb_2"
             android:layout_marginLeft="1dip"
             android:layout_marginTop="10dp"
             android:maxHeight="20dp">
@@ -58,16 +56,16 @@
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/play_without_login"
             android:layout_height="70dp"
             android:layout_width="@dimen/button_width"
-            android:text="@string/play_anon"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/login_button_text_color"
             android:background="#8bc34a"
             android:padding="5dp"
+            android:text="PLAY NOW"
+            android:textColor="@color/login_button_text_color"
             android:textSize="@dimen/login_play_text_size"/>
+
 
         <View
             android:layout_height = "1dp"
