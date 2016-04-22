@@ -42,6 +42,10 @@
             android:layout_marginLeft="1dip"/>
        </com.andexert.library.RippleView>
 
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/login_fb"
             android:layout_width="@dimen/button_width"
@@ -53,12 +57,17 @@
             android:layout_marginLeft="1dip"
             android:layout_marginTop="10dp"
             android:maxHeight="20dp"/>
+        </com.andexert.library.RippleView>
 
         <View
             android:layout_height = "1dp"
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/play_without_login"
             android:layout_height="70dp"
@@ -69,6 +78,7 @@
             android:text="PLAY NOW"
             android:textColor="@color/login_button_text_color"
             android:textSize="@dimen/login_play_text_size"/>
+        </com.andexert.library.RippleView>
 
 
         <View

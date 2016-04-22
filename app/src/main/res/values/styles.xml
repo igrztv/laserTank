@@ -9,6 +9,11 @@
 
     </style>
 
+    <style name="AppThemeProcessDialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/base_layout_color</item>
+        <item name="android:background">@color/base_layout_color_dark</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

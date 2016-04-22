@@ -1,5 +1,6 @@
 package com.example.morgan.lasertang;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
@@ -126,9 +127,15 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppThemeProcessDialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Подождите немного, у нас авторизация...");
+        progressDialog.show();
         VKCallback<VKAccessToken> callback = new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
+                progressDialog.dismiss();
                 res.save();
                 if (vkUserRequest != null) {
                     return;
@@ -139,6 +146,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onError(VKError error) {
+                progressDialog.dismiss();
                 processOauthError();
             }
         };
@@ -151,11 +159,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void fetchFbProfile() {
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppThemeProcessDialog);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Подождите немного, у нас авторизация...");
+        progressDialog.show();
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
+                        progressDialog.dismiss();
                         if (object == null) return;
                         try {
                             Map<String, String> userInfo = userToHash(object);
