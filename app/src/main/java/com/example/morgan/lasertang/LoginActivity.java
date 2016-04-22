@@ -1,10 +1,13 @@
 package com.example.morgan.lasertang;
 
+import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,14 +48,26 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Button vk_button = (Button) findViewById(R.id.login_vk);
-        Button fb_button = (Button) findViewById(R.id.login_fb);
-        Button play_button = (Button) findViewById(R.id.play_without_login);
+        AppCompatButton vk_button = (AppCompatButton) findViewById(R.id.login_vk);
+        AppCompatButton fb_button = (AppCompatButton) findViewById(R.id.login_fb);
+        AppCompatButton play_button = (AppCompatButton) findViewById(R.id.play_without_login);
+
+        ColorStateList socialColorStateList = new ColorStateList(new int [][]{new int[0]},
+                new int[]{ getResources().getColor(R.color.social_btn)});
+        ColorStateList playColorStateList = new ColorStateList(new int [][]{new int[0]},
+                new int[]{ getResources().getColor(R.color.play_btn)});
+        vk_button.setSupportBackgroundTintList(socialColorStateList);
+        fb_button.setSupportBackgroundTintList(socialColorStateList);
+        play_button.setSupportBackgroundTintList(playColorStateList);
 
         vk_button.setOnClickListener(loginWithVk);
         fb_button.setOnClickListener(loginWithFb);
         play_button.setOnClickListener(goToPlay);
 
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayShowTitleEnabled(false);
+        }
         fbCallbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(fbCallbackManager, fbCallback);
@@ -62,7 +77,6 @@ public class LoginActivity extends AppCompatActivity {
     FacebookCallback<LoginResult> fbCallback= new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
-            Map<String, String> userInfo = new HashMap<String, String>();
             AccessToken accessToken = AccessToken.getCurrentAccessToken();
             if (accessToken == null) {
                 processOauthError();
@@ -225,12 +239,6 @@ public class LoginActivity extends AppCompatActivity {
             vkUserRequest.unregisterObject();
             vkUserRequest.setRequestListener(userInfoRequestListener);
         }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
     }
 
     @Override

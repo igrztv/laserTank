@@ -6,6 +6,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:gravity="center">
         <TextView
             android:id="@+id/textView1"
@@ -24,32 +25,34 @@
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
-        <Button
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
+       <android.support.v7.widget.AppCompatButton
             android:layout_marginBottom="10dp"
             android:id="@+id/login_vk"
             android:layout_width="@dimen/button_width"
             android:gravity="center"
             android:layout_height="70dp"
             android:text="Вконтакте"
-            android:drawableLeft="@drawable/vk_2"
+            android:backgroundTint="@color/social_btn"
             android:textColor="#fff"
             android:textSize="@dimen/button_text_size"
-            android:layout_marginLeft="1dip">
-        </Button>
+            android:layout_marginLeft="1dip"/>
+       </com.andexert.library.RippleView>
 
-
-        <Button
+        <android.support.v7.widget.AppCompatButton
             android:id="@+id/login_fb"
             android:layout_width="@dimen/button_width"
             android:layout_height="70dp"
-            android:textColor="#fff"
+            android:backgroundTint="@color/social_btn"
             android:text="Facebook"
+            android:textColor="#fff"
             android:textSize="@dimen/button_text_size"
-            android:drawableLeft="@drawable/fb_2"
             android:layout_marginLeft="1dip"
             android:layout_marginTop="10dp"
-            android:maxHeight="20dp">
-        </Button>
+            android:maxHeight="20dp"/>
 
         <View
             android:layout_height = "1dp"
@@ -60,7 +63,8 @@
             android:id="@+id/play_without_login"
             android:layout_height="70dp"
             android:layout_width="@dimen/button_width"
-            android:background="#8bc34a"
+            android:backgroundTint=
+                "@color/play_btn"
             android:padding="5dp"
             android:text="PLAY NOW"
             android:textColor="@color/login_button_text_color"

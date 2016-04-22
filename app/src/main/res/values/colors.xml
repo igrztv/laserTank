@@ -11,4 +11,6 @@
     <color name="base_layout_color_accent">#26C6DA</color>
     <color name="action_bar_text_color">#ffffff</color>
     <color name="login_button_text_color">#ffffff</color>
+    <color name="social_btn">#0097A7</color>
+    <color name="play_btn">#689F38</color>
 </resources>
