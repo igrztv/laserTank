@@ -8,46 +8,50 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-public class SettingsActivity extends ListActivity {
+//public class SettingsActivity extends ListActivity {
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     String LOG = "SETTINGS_ACTIVITY_LOG";
 
     BTDevicesReceiver newBTdevice;
+    Button goToStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_settings);
 
-        // 1. pass context and data to the custom adapter
-        ListAdapter adapter = new ListAdapter(this, generateData());
-        // 3. setListAdapter
-        //listView.setAdapter(adapter); if extending Activity
-        setListAdapter(adapter);
+        goToStore = (Button) findViewById(R.id.button);
 
-        newBTdevice = new BTDevicesReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BTService.searchStarted);
-        intentFilter.addAction(BTService.newDevice);
-        intentFilter.addAction(BTService.searchStopped);
-        intentFilter.addAction(BTService.tankConnected);
-        intentFilter.addAction(BTService.tankDisconnected);
-        registerReceiver(newBTdevice, intentFilter);
+        goToStore.setOnClickListener(this);
+
+//        // 1. pass context and data to the custom adapter
+//        ListAdapter adapter = new ListAdapter(this, generateData());
+//        // 3. setListAdapter
+//        //listView.setAdapter(adapter); if extending Activity
+//        setListAdapter(adapter);
+
+//        newBTdevice = new BTDevicesReceiver();
+//        IntentFilter intentFilter = new IntentFilter();
+//        intentFilter.addAction(BTService.searchStarted);
+//        intentFilter.addAction(BTService.newDevice);
+//        intentFilter.addAction(BTService.searchStopped);
+//        intentFilter.addAction(BTService.tankConnected);
+//        intentFilter.addAction(BTService.tankDisconnected);
+//        registerReceiver(newBTdevice, intentFilter);
     }
 
-    private ArrayList<Model> generateData(){
-        ArrayList<Model> models = new ArrayList<Model>();
-        models.add(new Model("Group Title"));
-        models.add(new Model(R.drawable.amperka, "Menu Item 1", "1"));
-        models.add(new Model(R.drawable.amperka, "Menu Item 2", "2"));
-        models.add(new Model(R.drawable.amperka, "Menu Item 3", "12"));
-
-        return models;
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(SettingsActivity.this, StoreActivity.class);
+        startActivityForResult(intent, 1);
     }
 
     @Override

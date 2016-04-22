@@ -21,7 +21,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="поиск"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/big_button_selector"
         android:id="@+id/btnSearch"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

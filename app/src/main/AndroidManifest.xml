@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.morgan.lasertang" >
+    package="com.example.morgan.lasertang">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="LaserTang"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="Панель управления"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".SearchActivity"
             android:label="Поиск"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".InviteActivity"
             android:screenOrientation="portrait" />
@@ -32,14 +30,13 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".SettingsActivity"
-            android:label="Настройки"
-            android:parentActivityName=".SearchActivity" >
+            android:label="Настройки">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.morgan.lasertang.SearchActivity" />
@@ -47,21 +44,22 @@
         <activity
             android:name=".StoreActivity"
             android:label="@string/title_activity_store"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <service
             android:name=".BTService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
         <activity
             android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
@@ -70,11 +68,15 @@
             android:name=".LoginActivity"
             android:label="Вход"
             android:screenOrientation="portrait" />
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".tabbedTryActivity"
+            android:label="@string/title_activity_tabbed_try"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -93,7 +93,9 @@
     <integer name="com_vk_sdk_AppId">5419695</integer>
     <string name="login">Login</string>
     <string name="or">or</string>
-    <string name="play_anon">PLAY NOW</string>
-    <string name="invite_friends">INVITE FRIENDS</string>
+    <string name="play_anon">ИГРАТЬ</string>
+    <string name="invite_friends">Пригласить друзей</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_tabbed_store">TabbedStoreActivity</string>
+    <string name="title_activity_tabbed_try">tabbedTryActivity</string>
 </resources>
