@@ -30,16 +30,10 @@
             android:layout_height="wrap_content"
             app:rv_centered="true">
        <android.support.v7.widget.AppCompatButton
-            android:layout_marginBottom="10dp"
             android:id="@+id/login_vk"
-            android:layout_width="@dimen/button_width"
-            android:gravity="center"
-            android:layout_height="70dp"
             android:text="Вконтакте"
-            android:backgroundTint="@color/social_btn"
-            android:textColor="#fff"
-            android:textSize="@dimen/button_text_size"
-            android:layout_marginLeft="1dip"/>
+            style="@style/SocialActivityButton"
+            />
        </com.andexert.library.RippleView>
 
         <com.andexert.library.RippleView
@@ -48,15 +42,8 @@
             app:rv_centered="true">
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/login_fb"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="70dp"
-            android:backgroundTint="@color/social_btn"
             android:text="Facebook"
-            android:textColor="#fff"
-            android:textSize="@dimen/button_text_size"
-            android:layout_marginLeft="1dip"
-            android:layout_marginTop="10dp"
-            android:maxHeight="20dp"/>
+            style="@style/SocialActivityButton"/>
         </com.andexert.library.RippleView>
 
         <View
@@ -70,14 +57,9 @@
             app:rv_centered="true">
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/play_without_login"
-            android:layout_height="70dp"
-            android:layout_width="@dimen/button_width"
-            android:backgroundTint=
-                "@color/play_btn"
-            android:padding="5dp"
             android:text="PLAY NOW"
-            android:textColor="@color/login_button_text_color"
-            android:textSize="@dimen/login_play_text_size"/>
+            style="@style/SocialActivityButton"
+            />
         </com.andexert.library.RippleView>
 
 

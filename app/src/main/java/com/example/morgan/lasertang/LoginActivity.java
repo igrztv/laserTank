@@ -1,28 +1,19 @@
 package com.example.morgan.lasertang;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
+
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
@@ -39,10 +30,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity {
-    private static final String LOGIN_SHARED_PREFERENCES = "login_";
-    private VKRequest vkUserRequest;
-    private CallbackManager fbCallbackManager;
+public class LoginActivity extends BaseSocialActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,39 +53,66 @@ public class LoginActivity extends AppCompatActivity {
         fb_button.setOnClickListener(loginWithFb);
         play_button.setOnClickListener(goToPlay);
 
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-        }
-        fbCallbackManager = CallbackManager.Factory.create();
+        vkRequestListener = new VKRequest.VKRequestListener() {
+            @Override
+            public void onComplete(VKResponse response) {
+                requestInProgressDialog.dismiss();
+                Map<String, String> userInfo;
+                try {
+                    JSONArray responseArr = (JSONArray) response.json.get("response");
+                    JSONObject user = responseArr.getJSONObject(0);
+                    userInfo = userToHash(user);
+                    saveLoginInfo("vk", userInfo);
+                } catch (JSONException e) {
+                    //DO NOTHING: - info is not necessary
+                }
+                goToPlayView();
+                vkUserRequest = null;
+            }
+            @Override
+            public void onError(VKError error) {
+                requestInProgressDialog.dismiss();
+                vkUserRequest = null;
+                //DO NOTHING: info is not necessary
+            }
+        };
 
-        LoginManager.getInstance().registerCallback(fbCallbackManager, fbCallback);
+        vkCallback = new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                res.save();
+                if (vkUserRequest != null) {
+                    return;
+                }
+                vkUserRequest =  VKApi.users().get();
+                requestInProgressDialog.show();
+                vkUserRequest.executeWithListener(vkRequestListener);
+            }
+
+            @Override
+            public void onError(VKError error) {
+                showErrorText();
+            }
+        };
 
     }
 
-    FacebookCallback<LoginResult> fbCallback= new FacebookCallback<LoginResult>() {
-        @Override
-        public void onSuccess(LoginResult loginResult) {
-            AccessToken accessToken = AccessToken.getCurrentAccessToken();
-            if (accessToken == null) {
-                processOauthError();
-                return;
-            }
-            fetchFbProfile();
-            goToPlayView();
-        }
+    @Override
+    public void processFbLoginSuccess() {
+        fetchFbProfile();
+        goToPlayView();
+    }
 
-        @Override
-        public void onCancel() {
-            processOauthError();
-        }
+    @Override
+    public void prepareDialog() {
+        requestInProgressDialog.setIndeterminate(true);
+        requestInProgressDialog.setMessage(getResources().getString(R.string.auth_in_progress_msg));
+    }
 
-        @Override
-        public void onError(FacebookException exception) {
-            processOauthError();
-        }
-    };
-
+    @Override
+    public void showErrorText() {
+        showMessage(R.string.auth_error);
+    }
     View.OnClickListener loginWithVk = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -125,51 +140,15 @@ public class LoginActivity extends AppCompatActivity {
     };
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppThemeProcessDialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Подождите немного, у нас авторизация...");
-        progressDialog.show();
-        VKCallback<VKAccessToken> callback = new VKCallback<VKAccessToken>() {
-            @Override
-            public void onResult(VKAccessToken res) {
-                progressDialog.dismiss();
-                res.save();
-                if (vkUserRequest != null) {
-                    return;
-                }
-                vkUserRequest =  VKApi.users().get();
-                vkUserRequest.executeWithListener(userInfoRequestListener);
-            }
-
-            @Override
-            public void onError(VKError error) {
-                progressDialog.dismiss();
-                processOauthError();
-            }
-        };
-
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, callback)) {
-            fbCallbackManager.onActivityResult(requestCode,
-                    resultCode, data);
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
 
     private void fetchFbProfile() {
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppThemeProcessDialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Подождите немного, у нас авторизация...");
-        progressDialog.show();
+        requestInProgressDialog.show();
         GraphRequest request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        progressDialog.dismiss();
+                        requestInProgressDialog.dismiss();
                         if (object == null) return;
                         try {
                             Map<String, String> userInfo = userToHash(object);
@@ -195,35 +174,9 @@ public class LoginActivity extends AppCompatActivity {
         return userInfo;
     }
 
-    VKRequest.VKRequestListener userInfoRequestListener = new VKRequest.VKRequestListener() {
-        @Override
-        public void onComplete(VKResponse response) {
-            Map<String, String> userInfo;
-            try {
-                JSONArray responseArr = (JSONArray) response.json.get("response");
-                JSONObject user = (JSONObject) responseArr.getJSONObject(0);
-                userInfo = userToHash(user);
-                saveLoginInfo("vk", userInfo);
-            }
-            catch (JSONException e) {
-                //DO NOTHING: - info is not necessary
-            }
-            goToPlayView();
-        }
-
-        @Override
-        public void onError(VKError error) {
-            //DO NOTHING: info is not necessary
-        }
-    };
-
-    private void processOauthError() {
-        Toast.makeText(LoginActivity.this,
-            "Упс, авторизация не прошла :(", Toast.LENGTH_LONG).show();
-    }
 
     private void goToPlayView() {
-        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+        Intent intent = new Intent(LoginActivity.this, SettingsActivity.class);
         startActivity(intent);
     }
 
@@ -234,47 +187,5 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString(entry.getKey(), entry.getValue());
         }
         editor.commit();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (vkUserRequest != null) {
-            outState.putLong("vk_request", vkUserRequest.registerObject());
-        }
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        long requestId = savedInstanceState.getLong("request");
-        vkUserRequest = VKRequest.getRegisteredRequest(requestId);
-        if (vkUserRequest != null) {
-            vkUserRequest.unregisterObject();
-            vkUserRequest.setRequestListener(userInfoRequestListener);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (vkUserRequest != null) {
-            vkUserRequest.cancel();
-        }
     }
 }

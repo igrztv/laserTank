@@ -13,4 +13,6 @@
     <color name="login_button_text_color">#ffffff</color>
     <color name="social_btn">#0097A7</color>
     <color name="play_btn">#689F38</color>
+    <color name="toast_layout_color">#26A69A</color>
+    <color name="toast_text_color">#455A64</color>
 </resources>
