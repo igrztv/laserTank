@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -23,6 +24,21 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     BTDevicesReceiver newBTdevice;
     Button goToStore;
 
+    public static CustomListAdapter adapter;
+
+    final static String[] motor_item = new String[] {
+            "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
+    };
+    final static String[] motor_comment = new String[] {
+            "", "Управление с помощью гироскопа", "Руль слева, башня справа", ""
+    };
+    static Integer[] motor_img={
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +48,28 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         goToStore.setOnClickListener(this);
 
-//        // 1. pass context and data to the custom adapter
-//        ListAdapter adapter = new ListAdapter(this, generateData());
-//        // 3. setListAdapter
-//        //listView.setAdapter(adapter); if extending Activity
-//        setListAdapter(adapter);
+        adapter = new CustomListAdapter(this, motor_item, motor_comment, motor_img);
 
-//        newBTdevice = new BTDevicesReceiver();
-//        IntentFilter intentFilter = new IntentFilter();
-//        intentFilter.addAction(BTService.searchStarted);
-//        intentFilter.addAction(BTService.newDevice);
-//        intentFilter.addAction(BTService.searchStopped);
-//        intentFilter.addAction(BTService.tankConnected);
-//        intentFilter.addAction(BTService.tankDisconnected);
-//        registerReceiver(newBTdevice, intentFilter);
+        ListView listView = (ListView)findViewById(R.id.listView1);
+        listView.setAdapter(adapter);
+
+//        adapter.setData(motor_item, motor_comment, motor_img);
+//        adapter.notifyDataSetChanged();
+
+/*        // 1. pass context and data to the custom adapter
+        ListAdapter adapter = new ListAdapter(this, generateData());
+        // 3. setListAdapter
+        //listView.setAdapter(adapter); if extending Activity
+        setListAdapter(adapter);
+
+        newBTdevice = new BTDevicesReceiver();
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BTService.searchStarted);
+        intentFilter.addAction(BTService.newDevice);
+        intentFilter.addAction(BTService.searchStopped);
+        intentFilter.addAction(BTService.tankConnected);
+        intentFilter.addAction(BTService.tankDisconnected);
+        registerReceiver(newBTdevice, intentFilter);*/
     }
 
     @Override

@@ -57,7 +57,6 @@ public class StoreActivity extends AppCompatActivity {
             R.drawable.tank,
     };
 
-
     final static String[] weapon_item = new String[] {
             "Кузя", "Китти", "Масяня", "Симба"
     };
