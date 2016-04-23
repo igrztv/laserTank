@@ -1,5 +1,6 @@
 package com.example.morgan.lasertang;
 
+import android.app.ListActivity;
 import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.content.BroadcastReceiver;
@@ -10,7 +11,9 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ProgressBar;
 
-public class SettingsActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class SettingsActivity extends ListActivity {
 
     String LOG = "SETTINGS_ACTIVITY_LOG";
 
@@ -19,7 +22,13 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        // setContentView(R.layout.activity_settings);
+
+        // 1. pass context and data to the custom adapter
+        ListAdapter adapter = new ListAdapter(this, generateData());
+        // 3. setListAdapter
+        //listView.setAdapter(adapter); if extending Activity
+        setListAdapter(adapter);
 
         newBTdevice = new BTDevicesReceiver();
         IntentFilter intentFilter = new IntentFilter();
@@ -29,6 +38,16 @@ public class SettingsActivity extends AppCompatActivity {
         intentFilter.addAction(BTService.tankConnected);
         intentFilter.addAction(BTService.tankDisconnected);
         registerReceiver(newBTdevice, intentFilter);
+    }
+
+    private ArrayList<Model> generateData(){
+        ArrayList<Model> models = new ArrayList<Model>();
+        models.add(new Model("Group Title"));
+        models.add(new Model(R.drawable.amperka, "Menu Item 1", "1"));
+        models.add(new Model(R.drawable.amperka, "Menu Item 2", "2"));
+        models.add(new Model(R.drawable.amperka, "Menu Item 3", "12"));
+
+        return models;
     }
 
     @Override
