@@ -19,12 +19,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingsActivity extends AppCompatActivity {
 
     String LOG = "SETTINGS_ACTIVITY_LOG";
 
     BTDevicesReceiver newBTdevice;
-    Button goToStore;
     TextView tankName;
 
     public static CustomListAdapter adapter;
@@ -52,9 +51,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         tankName = (TextView) findViewById(R.id.tankName);
         tankName.setText(calledIntent.getStringExtra("NAME"));
 
-        goToStore = (Button) findViewById(R.id.button);
-        goToStore.setOnClickListener(this);
-
         adapter = new CustomListAdapter(this, motor_item, motor_comment, motor_img);
 
         ListView listView = (ListView)findViewById(R.id.listView1);
@@ -78,12 +74,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 }
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(SettingsActivity.this, StoreActivity.class);
-        startActivityForResult(intent, 1);
     }
 
     @Override
