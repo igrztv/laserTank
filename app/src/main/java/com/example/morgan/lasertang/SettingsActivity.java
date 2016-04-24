@@ -9,20 +9,23 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-//public class SettingsActivity extends ListActivity {
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     String LOG = "SETTINGS_ACTIVITY_LOG";
 
     BTDevicesReceiver newBTdevice;
     Button goToStore;
+    TextView tankName;
 
     public static CustomListAdapter adapter;
 
@@ -44,8 +47,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        goToStore = (Button) findViewById(R.id.button);
+        Intent calledIntent = getIntent();
 
+        tankName = (TextView) findViewById(R.id.tankName);
+        tankName.setText(calledIntent.getStringExtra("NAME"));
+
+        goToStore = (Button) findViewById(R.id.button);
         goToStore.setOnClickListener(this);
 
         adapter = new CustomListAdapter(this, motor_item, motor_comment, motor_img);
@@ -53,23 +60,24 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         ListView listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(adapter);
 
-//        adapter.setData(motor_item, motor_comment, motor_img);
-//        adapter.notifyDataSetChanged();
-
-/*        // 1. pass context and data to the custom adapter
-        ListAdapter adapter = new ListAdapter(this, generateData());
-        // 3. setListAdapter
-        //listView.setAdapter(adapter); if extending Activity
-        setListAdapter(adapter);
-
         newBTdevice = new BTDevicesReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BTService.searchStarted);
-        intentFilter.addAction(BTService.newDevice);
-        intentFilter.addAction(BTService.searchStopped);
-        intentFilter.addAction(BTService.tankConnected);
         intentFilter.addAction(BTService.tankDisconnected);
-        registerReceiver(newBTdevice, intentFilter);*/
+        registerReceiver(newBTdevice, intentFilter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Log.d(LOG, adapter.getItem(position));
+                switch(position){
+                    case 0:
+                        Intent intent = new Intent(SettingsActivity.this, StoreActivity.class);
+                        startActivityForResult(intent, 1);
+                        break;
+
+                }
+            }
+        });
     }
 
     @Override
@@ -107,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         public void onReceive(Context arg0, Intent arg1) {
             String action = arg1.getAction();
             if(action.equals(BTService.tankDisconnected)) {
-                Log.d(LOG, "Sorry lost connection");
+                Toast.makeText(arg0, "Sorry lost connection", Toast.LENGTH_SHORT).show();
             }
         }
     }

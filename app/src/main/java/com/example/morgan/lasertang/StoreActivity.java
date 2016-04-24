@@ -32,16 +32,15 @@ public class StoreActivity extends AppCompatActivity {
     static String LOG = "STORE_ACTIVITY_LOG";
 
     final static String[] motor_item = new String[] {
-            "Рыжик", "Барсик", "Мурзик", "Мурка"
+            "Комплект шасси и гусениц", "Аккумуляторы 2100 мАч", "Быстрые двигатели"
     };
     final static String[] motor_comment = new String[] {
-            "Васька", "Томасина", "Пушок", "Дымка"
+            "улучшенное цепление", "супердолгие", "большое передаточное отношение"
     };
     static Integer[] motor_img={
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank,
+            R.drawable.wheel,
+            R.drawable.battery,
+            R.drawable.engine
     };
 
     final static String[] armor_item = new String[] {
@@ -54,7 +53,7 @@ public class StoreActivity extends AppCompatActivity {
             R.drawable.tank,
             R.drawable.tank,
             R.drawable.tank,
-            R.drawable.tank,
+            R.drawable.tank
     };
 
     final static String[] weapon_item = new String[] {
@@ -67,7 +66,7 @@ public class StoreActivity extends AppCompatActivity {
             R.drawable.tank,
             R.drawable.tank,
             R.drawable.tank,
-            R.drawable.tank,
+            R.drawable.tank
     };
 
     /**
@@ -120,10 +119,6 @@ public class StoreActivity extends AppCompatActivity {
                                 break;
                             case 2:
                                 adapter.setData(weapon_item,weapon_comment,weapon_img);
-                                adapter.notifyDataSetChanged();
-                                break;
-                            case 3:
-                                adapter.setData(motor_item, motor_comment, motor_img);
                                 adapter.notifyDataSetChanged();
                                 break;
                             default: break;
