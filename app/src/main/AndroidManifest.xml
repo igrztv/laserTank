@@ -12,7 +12,7 @@
         android:icon="@drawable/icon"
         android:label="LaserTang"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:screenOrientation="landscape"
@@ -73,10 +73,6 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name=".tabbedTryActivity"
-            android:label="@string/title_activity_tabbed_try"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

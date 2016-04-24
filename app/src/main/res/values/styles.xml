@@ -9,6 +9,11 @@
 
     </style>
 
+    <style name="AppThemeProcessDialog" parent="Theme.AppCompat.Dialog">
+        <item name="colorAccent">@color/base_layout_color</item>
+        <item name="android:background">@color/base_layout_color_dark</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -28,5 +33,14 @@
 
     <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@color/action_bar_text_color</item>
+    </style>
+    <style name="SocialActivityButton">
+        <item name="android:layout_width">@dimen/button_width</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_marginLeft">1dip</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:maxHeight">20dp</item>
     </style>
 </resources>

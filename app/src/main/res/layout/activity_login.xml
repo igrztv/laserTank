@@ -6,6 +6,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:gravity="center">
         <TextView
             android:id="@+id/textView1"
@@ -25,50 +26,41 @@
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
-        <Button
-            android:layout_marginBottom="10dp"
-            android:id="@+id/login_vk"
-            android:layout_width="@dimen/button_width"
-            android:gravity="center"
-            android:layout_height="70dp"
-            android:text="Вконтакте"
-            android:background="@drawable/vk_1"
-            android:textColor="#fff"
-            android:paddingLeft="30dp"
-            android:textSize="@dimen/button_text_size"
-            android:layout_marginLeft="1dip">
-        </Button>
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
+		   <android.support.v7.widget.AppCompatButton
+				android:id="@+id/login_vk"
+				android:text="Вконтакте"
+				style="@style/SocialActivityButton"
+				/>
+       </com.andexert.library.RippleView>
 
-
-        <Button
-            android:id="@+id/login_fb"
-            android:layout_width="@dimen/button_width"
-            android:layout_height="70dp"
-            android:textColor="#fff"
-            android:text="facebook"
-            android:textSize="@dimen/button_text_size"
-            android:background="@drawable/fb_1"
-            android:paddingLeft="30dp"
-            android:layout_marginLeft="1dip"
-            android:layout_marginTop="10dp"
-            android:maxHeight="20dp">
-        </Button>
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/login_fb"
+				android:text="Facebook"
+				style="@style/SocialActivityButton"/>
+        </com.andexert.library.RippleView>
 
         <View
             android:layout_height = "1dp"
             android:layout_width="match_parent"
             android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/play_without_login"
-            android:layout_height="70dp"
-            android:layout_width="@dimen/button_width"
-            android:text="@string/play_anon"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/login_button_text_color"
-            android:background="@drawable/big_button_selector"
-            android:padding="5dp"
-            android:textSize="@dimen/login_play_text_size"/>
+        <com.andexert.library.RippleView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:rv_centered="true">
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/play_without_login"
+				android:text="@string/play_anon"
+				style="@style/SocialActivityButton" />
+        </com.andexert.library.RippleView>
 
         <View
             android:layout_height = "1dp"

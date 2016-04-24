@@ -96,6 +96,10 @@
     <string name="play_anon">ИГРАТЬ</string>
     <string name="invite_friends">Пригласить друзей</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_tabbed_store">TabbedStoreActivity</string>
-    <string name="title_activity_tabbed_try">tabbedTryActivity</string>
+    <string name="auth_in_progress_msg">"Подождите немного, у нас авторизация..."</string>
+    <string name="invite_in_progress_msg">"Работаем..."</string>
+    <string name="invite_success">Победа, мы на вашей стене)"</string>
+    <string name="auth_error">"Упс, авторизация не прошла :("</string>
+    <string name="invite_error">"Ого, что-то пошло не так :("</string>
+    <string name="wall_invitation">"Привет, я тестирую lazerTang"</string>
 </resources>
