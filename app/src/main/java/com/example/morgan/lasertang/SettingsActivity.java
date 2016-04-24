@@ -8,46 +8,72 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SettingsActivity extends ListActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     String LOG = "SETTINGS_ACTIVITY_LOG";
 
     BTDevicesReceiver newBTdevice;
+    TextView tankName;
+
+    public static CustomListAdapter adapter;
+
+    final static String[] motor_item = new String[] {
+            "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
+    };
+    final static String[] motor_comment = new String[] {
+            "", "Управление с помощью гироскопа", "Руль слева, башня справа", ""
+    };
+    static Integer[] motor_img={
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank,
+            R.drawable.tank
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_settings);
 
-        // 1. pass context and data to the custom adapter
-        ListAdapter adapter = new ListAdapter(this, generateData());
-        // 3. setListAdapter
-        //listView.setAdapter(adapter); if extending Activity
-        setListAdapter(adapter);
+        Intent calledIntent = getIntent();
+
+        tankName = (TextView) findViewById(R.id.tankName);
+        tankName.setText(calledIntent.getStringExtra("NAME"));
+
+        adapter = new CustomListAdapter(this, motor_item, motor_comment, motor_img);
+
+        ListView listView = (ListView)findViewById(R.id.listView1);
+        listView.setAdapter(adapter);
 
         newBTdevice = new BTDevicesReceiver();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BTService.searchStarted);
-        intentFilter.addAction(BTService.newDevice);
-        intentFilter.addAction(BTService.searchStopped);
-        intentFilter.addAction(BTService.tankConnected);
         intentFilter.addAction(BTService.tankDisconnected);
         registerReceiver(newBTdevice, intentFilter);
-    }
 
-    private ArrayList<Model> generateData(){
-        ArrayList<Model> models = new ArrayList<Model>();
-        models.add(new Model("Group Title"));
-        models.add(new Model(R.drawable.amperka, "Menu Item 1", "1"));
-        models.add(new Model(R.drawable.amperka, "Menu Item 2", "2"));
-        models.add(new Model(R.drawable.amperka, "Menu Item 3", "12"));
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Log.d(LOG, adapter.getItem(position));
+                switch(position){
+                    case 0:
+                        Intent intent = new Intent(SettingsActivity.this, StoreActivity.class);
+                        startActivityForResult(intent, 1);
+                        break;
 
-        return models;
+                }
+            }
+        });
     }
 
     @Override
@@ -79,7 +105,7 @@ public class SettingsActivity extends ListActivity {
         public void onReceive(Context arg0, Intent arg1) {
             String action = arg1.getAction();
             if(action.equals(BTService.tankDisconnected)) {
-                Log.d(LOG, "Sorry lost connection");
+                Toast.makeText(arg0, "Sorry lost connection", Toast.LENGTH_SHORT).show();
             }
         }
     }

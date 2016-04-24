@@ -30,21 +30,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:rv_centered="true">
-       <android.support.v7.widget.AppCompatButton
-            android:id="@+id/login_vk"
-            android:text="Вконтакте"
-            style="@style/SocialActivityButton"
-            />
+		   <android.support.v7.widget.AppCompatButton
+				android:id="@+id/login_vk"
+				android:text="Вконтакте"
+				style="@style/SocialActivityButton"
+				/>
        </com.andexert.library.RippleView>
 
         <com.andexert.library.RippleView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:rv_centered="true">
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/login_fb"
-            android:text="Facebook"
-            style="@style/SocialActivityButton"/>
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/login_fb"
+				android:text="Facebook"
+				style="@style/SocialActivityButton"/>
         </com.andexert.library.RippleView>
 
         <View
@@ -56,13 +56,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:rv_centered="true">
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/play_without_login"
-            android:text="PLAY NOW"
-            style="@style/SocialActivityButton"
-            />
+			<android.support.v7.widget.AppCompatButton
+				android:id="@+id/play_without_login"
+				android:text="@string/play_anon"
+				style="@style/SocialActivityButton" />
         </com.andexert.library.RippleView>
-
 
         <View
             android:layout_height = "1dp"
