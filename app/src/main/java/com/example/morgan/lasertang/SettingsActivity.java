@@ -26,7 +26,7 @@ public class SettingsActivity extends AppCompatActivity {
     BTDevicesReceiver newBTdevice;
     TextView tankName;
 
-    public static CustomListAdapter adapter;
+    public static SettingsListAdapter adapter;
 
     final static String[] motor_item = new String[] {
             "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         tankName = (TextView) findViewById(R.id.tankName);
         tankName.setText(calledIntent.getStringExtra("NAME"));
 
-        adapter = new CustomListAdapter(this, motor_item, motor_comment, motor_img);
+        adapter = new SettingsListAdapter(this, motor_item, motor_comment, motor_img);
 
         ListView listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(adapter);

@@ -42,14 +42,16 @@
             android:id="@+id/section_label"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             tools:context="com.example.morgan.lasertang.SettingsActivity"
             android:layout_below="@+id/tankAvatar">
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="fill_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:visibility="visible">
             </ListView>
+
         </LinearLayout>
 
     </RelativeLayout>
