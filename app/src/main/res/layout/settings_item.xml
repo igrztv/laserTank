@@ -48,7 +48,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/icon"
-        android:src=""
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="visible" />

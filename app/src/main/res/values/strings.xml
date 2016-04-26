@@ -2,7 +2,6 @@
     <string name="app_name">LaserTang</string>
     <string name="shoot_btn">FIRE</string>
     <string name="move_btn"> </string>
-    <string name="seekBar"></string>
 
     <string name="title_activity_fullscreen">Fullscreen Activity</string>
     <string name="dummy_button">Dummy Button</string>
@@ -96,8 +95,8 @@
     <string name="play_anon">ИГРАТЬ</string>
     <string name="invite_friends">Пригласить друзей</string>
     <string name="hello_world">Hello world!</string>
-    <string name="auth_in_progress_msg">"Подождите немного, у нас авторизация..."</string>
-    <string name="invite_in_progress_msg">"Работаем..."</string>
+    <string name="auth_in_progress_msg">"Подождите немного, у нас авторизация&#8230;"</string>
+    <string name="invite_in_progress_msg">"Работаем&#8230;"</string>
     <string name="invite_success">Победа, мы на вашей стене)"</string>
     <string name="auth_error">"Упс, авторизация не прошла :("</string>
     <string name="invite_error">"Ого, что-то пошло не так :("</string>

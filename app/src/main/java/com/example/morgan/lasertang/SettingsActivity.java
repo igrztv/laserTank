@@ -29,17 +29,13 @@ public class SettingsActivity extends AppCompatActivity {
     public static SettingsListAdapter adapter;
 
     final static String[] motor_item = new String[] {
-            "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
+            "В бой!", "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
     };
     final static String[] motor_comment = new String[] {
-            "", "Управление с помощью гироскопа", "Руль слева, башня справа", ""
+            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", ""
     };
-    static Integer[] motor_img={
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank
-    };
+
+    static Boolean[] motor_cB = new Boolean[] {false, false, true, true, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +47,7 @@ public class SettingsActivity extends AppCompatActivity {
         tankName = (TextView) findViewById(R.id.tankName);
         tankName.setText(calledIntent.getStringExtra("NAME"));
 
-        adapter = new SettingsListAdapter(this, motor_item, motor_comment, motor_img);
+        adapter = new SettingsListAdapter(this, motor_item, motor_comment, motor_cB);
 
         ListView listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(adapter);
@@ -67,8 +63,16 @@ public class SettingsActivity extends AppCompatActivity {
                 Log.d(LOG, adapter.getItem(position));
                 switch(position){
                     case 0:
-                        Intent intent = new Intent(SettingsActivity.this, StoreActivity.class);
-                        startActivityForResult(intent, 1);
+                        Intent mainIntent = new Intent(SettingsActivity.this, MainActivity.class);
+                        startActivityForResult(mainIntent, 1);
+                        break;
+                    case 1:
+                        Intent storeIntent = new Intent(SettingsActivity.this, StoreActivity.class);
+                        startActivityForResult(storeIntent, 1);
+                        break;
+                    case 4:
+                        Intent inviteIntent = new Intent(SettingsActivity.this, InviteActivity.class);
+                        startActivityForResult(inviteIntent, 1);
                         break;
 
                 }
@@ -98,6 +102,12 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.d(LOG, "onResume");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(newBTdevice);
     }
 
     private class BTDevicesReceiver extends BroadcastReceiver {

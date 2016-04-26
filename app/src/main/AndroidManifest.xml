@@ -20,23 +20,28 @@
         <activity
             android:name=".SearchActivity"
             android:label="Поиск"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.morgan.lasertang.LoginActivity" />
+        </activity>
         <activity
             android:name=".InviteActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".SettingsActivity"
-            android:label="Настройки">
+            android:label="Настройки"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.morgan.lasertang.SearchActivity" />
@@ -44,7 +49,8 @@
         <activity
             android:name=".StoreActivity"
             android:label="@string/title_activity_store"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
