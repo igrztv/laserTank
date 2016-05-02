@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends SideActivity implements View.OnClickListener {
 
     String LOG = "SETTINGS_ACTIVITY_LOG";
 
@@ -29,18 +30,22 @@ public class SettingsActivity extends AppCompatActivity {
     public static SettingsListAdapter adapter;
 
     final static String[] motor_item = new String[] {
-            "В бой!", "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
+            "В бой!", "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться", "меню"
     };
     final static String[] motor_comment = new String[] {
-            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", ""
+            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", "", "меню"
     };
 
-    static Boolean[] motor_cB = new Boolean[] {false, false, true, true, false};
+    static Boolean[] motor_cB = new Boolean[] {false, false, true, true, false, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_settings, null, false);
+        drawer.addView(contentView, 0);
 
         Intent calledIntent = getIntent();
 
@@ -56,6 +61,8 @@ public class SettingsActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(BTService.tankDisconnected);
         registerReceiver(newBTdevice, intentFilter);
+
+        tankName.setOnClickListener(this);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
@@ -74,10 +81,18 @@ public class SettingsActivity extends AppCompatActivity {
                         Intent inviteIntent = new Intent(SettingsActivity.this, InviteActivity.class);
                         startActivityForResult(inviteIntent, 1);
                         break;
-
+                    case 5:
+                        Intent menuIntent = new Intent(SettingsActivity.this, SideActivity.class);
+                        startActivityForResult(menuIntent, 1);
+                        break;
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.d(LOG, "onClick");
     }
 
     @Override
@@ -116,6 +131,7 @@ public class SettingsActivity extends AppCompatActivity {
             String action = arg1.getAction();
             if(action.equals(BTService.tankDisconnected)) {
                 Toast.makeText(arg0, "Sorry lost connection", Toast.LENGTH_SHORT).show();
+                SettingsActivity.this.finish();
             }
         }
     }

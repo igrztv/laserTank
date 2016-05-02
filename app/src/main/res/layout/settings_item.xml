@@ -1,24 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="@dimen/list_item_height"
-    android:columnCount="10"
-    android:rowCount="2">
+    android:layout_width="match_parent" android:layout_height="@dimen/list_item_height" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
-        android:layout_row="0"
-        android:layout_column="0"
         android:textSize="@dimen/list_item_title"
         android:textColor="#000"
-        android:layout_alignParentTop="false"
-        android:layout_toRightOf="@+id/icon"
-        android:layout_toEndOf="@+id/icon"
-        android:layout_marginLeft="10dp"
-        android:layout_alignParentBottom="false"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_alignParentLeft="false" />
+        android:text="Title"
+        android:layout_toRightOf="@+id/icon"
+        android:layout_below="@+id/space"
+        android:layout_marginLeft="10dp" />
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -42,7 +36,8 @@
         android:layout_toEndOf="@+id/icon"
         android:visibility="visible"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="25dp"
+        android:text="Subtitle" />
 
     <ImageView
         android:layout_width="50dp"
@@ -50,6 +45,15 @@
         android:id="@+id/icon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:visibility="visible" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/icon"
+        android:layout_toEndOf="@+id/icon"
+        android:id="@+id/space"
         android:visibility="visible" />
 
 </RelativeLayout>

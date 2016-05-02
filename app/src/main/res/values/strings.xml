@@ -101,4 +101,5 @@
     <string name="auth_error">"Упс, авторизация не прошла :("</string>
     <string name="invite_error">"Ого, что-то пошло не так :("</string>
     <string name="wall_invitation">"Привет, я тестирую lazerTang"</string>
+    <string name="title_activity_side">SideActivity</string>
 </resources>

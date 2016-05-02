@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.Space;
 import android.widget.TextView;
 
 public class SettingsListAdapter extends ArrayAdapter<String> {
@@ -65,9 +66,13 @@ public class SettingsListAdapter extends ArrayAdapter<String> {
         TextView txtComment = (TextView) rowView.findViewById(R.id.subtitle);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         CheckBox checkBox = (CheckBox) rowView.findViewById(R.id.checkBox);
+        Space space = (Space) rowView.findViewById(R.id.space);
 
-        Log.d(LOG, "title["+position+"] = "+title[position]);
+        Log.d(LOG, "title[" + position + "] = " + title[position]);
         txtTitle.setText(title[position]);
+        if(!subtitle[position].equals("")){
+            space.setVisibility(View.GONE);
+        }
         txtComment.setText(subtitle[position]);
         if (!cB[position]) {
             checkBox.setVisibility(View.GONE);

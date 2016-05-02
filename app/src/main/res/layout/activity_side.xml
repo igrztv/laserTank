@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_menu"
+        layout="@layout/app_bar_side"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -19,7 +19,15 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_menu"
-        app:menu="@menu/activity_menu_drawer" />
+        app:headerLayout="@layout/nav_header_side"
+        app:menu="@menu/activity_side_drawer" />
+
+    <!-- сюда инклюдим активити -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/activity_content">
+
+    </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>
