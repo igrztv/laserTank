@@ -33,6 +33,7 @@ import com.vk.sdk.api.photo.VKUploadImage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 
@@ -178,30 +179,31 @@ public class InviteActivity extends BaseSocialActivity {
     }
 
     private void publishWithFb() {
-        JSONObject params = new JSONObject();
-        try {
-            params.put("message", getResources().getString(R.string.wall_invitation));
-        } catch (JSONException e) {
-            showErrorText();
-            return;
-        }
+        Bundle params = new Bundle();
+        params.putString("message", getResources().getString(R.string.wall_invitation));
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        getWallPhoto().compress(Bitmap.CompressFormat.PNG, 100, baos);
+        params.putByteArray("picture", baos.toByteArray());
+
+
         requestInProgressDialog.show();
         GraphRequest request = GraphRequest.newPostRequest(
                 AccessToken.getCurrentAccessToken(),
-                "/me/feed",
-                params,
+                "/me/photos",
+                null,
                 new GraphRequest.Callback() {
                     @Override
                     public void onCompleted(GraphResponse response) {
                         requestInProgressDialog.dismiss();
                         if (response.getError() == null) showSuccessToast();
                         else {
+                            Toast.makeText(InviteActivity.this, response.getError().toString(), Toast.LENGTH_LONG).show();
                             showErrorText();
                         }
                     }
 
                 });
-
+        request.setParameters(params);
         request.executeAsync();
     }
 
