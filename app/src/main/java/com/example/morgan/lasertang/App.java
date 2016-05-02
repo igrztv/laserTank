@@ -11,6 +11,7 @@ import com.vk.sdk.VKSdk;
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKAccessTokenTracker;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -51,6 +52,7 @@ public class App extends Application {
         };
         super.onCreate();
     }
+
 
 
 }
