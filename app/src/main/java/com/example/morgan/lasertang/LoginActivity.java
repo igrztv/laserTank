@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
@@ -18,7 +19,9 @@ import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKApi;
+import com.vk.sdk.api.VKApiConst;
 import com.vk.sdk.api.VKError;
+import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 
@@ -62,6 +65,7 @@ public class LoginActivity extends BaseSocialActivity {
                     JSONArray responseArr = (JSONArray) response.json.get("response");
                     JSONObject user = responseArr.getJSONObject(0);
                     userInfo = userToHash(user);
+                    //Toast.makeText(LoginActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
                     saveLoginInfo("vk", userInfo);
                 } catch (JSONException e) {
                     //DO NOTHING: - info is not necessary
@@ -84,7 +88,7 @@ public class LoginActivity extends BaseSocialActivity {
                 if (vkUserRequest != null) {
                     return;
                 }
-                vkUserRequest =  VKApi.users().get();
+                vkUserRequest =  VKApi.users().get(VKParameters.from(VKApiConst.FIELDS, "photo_max_orig"));
                 requestInProgressDialog.show();
                 vkUserRequest.executeWithListener(vkRequestListener);
             }
@@ -100,7 +104,6 @@ public class LoginActivity extends BaseSocialActivity {
     @Override
     public void processFbLoginSuccess() {
         fetchFbProfile();
-        goToPlayView();
     }
 
     @Override
@@ -116,6 +119,7 @@ public class LoginActivity extends BaseSocialActivity {
     View.OnClickListener loginWithVk = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            clearSharedPreferences();
             VKSdk.login(LoginActivity.this);
         }
     };
@@ -123,10 +127,10 @@ public class LoginActivity extends BaseSocialActivity {
     View.OnClickListener loginWithFb = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            clearSharedPreferences();
             LoginManager.getInstance().logInWithReadPermissions(
-                LoginActivity.this,
-                Arrays.asList("public_profile")
+                    LoginActivity.this,
+                    Arrays.asList("public_profile")
             );
 
         }
@@ -139,6 +143,10 @@ public class LoginActivity extends BaseSocialActivity {
         }
     };
 
+    private void clearSharedPreferences() {
+        getSharedPreferences("login_fb", Context.MODE_PRIVATE).edit().clear().commit();
+        getSharedPreferences("login_vk", Context.MODE_PRIVATE).edit().clear().commit();
+    }
 
 
     private void fetchFbProfile() {
@@ -152,15 +160,17 @@ public class LoginActivity extends BaseSocialActivity {
                         if (object == null) return;
                         try {
                             Map<String, String> userInfo = userToHash(object);
+                            //Toast.makeText(LoginActivity.this, object.toString(), Toast.LENGTH_SHORT).show();
                             saveLoginInfo("fb", userInfo);
                             //access token is managed by fb class
                         } catch (JSONException e) {
                             //DO NOTHING: info is not  necessary
                         }
+                        goToPlayView();
                     }
                 });
         Bundle parameters = new Bundle();
-        parameters.putString("fields", "id,first_name,last_name");
+        parameters.putString("fields", "id,first_name,last_name,picture.type(large)");
         request.setParameters(parameters);
         request.executeAsync();
     }
@@ -170,6 +180,22 @@ public class LoginActivity extends BaseSocialActivity {
         String fields[] =  {"first_name", "last_name"};
         for (String field: fields) {
             userInfo.put(field, user.getString(field));
+        }
+        String photo = null;
+        try {//try fb
+            photo = user.getJSONObject("picture").getJSONObject("data").getString("url");
+        }
+        catch (JSONException e) {
+            //no photo;
+        }
+        try {//try vk
+            photo = user.getString("photo_max_orig");
+        }
+        catch (JSONException e) {
+            //no photo;
+        }
+        if (photo != null) {
+            userInfo.put("photo", photo);
         }
         return userInfo;
     }
