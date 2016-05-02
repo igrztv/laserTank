@@ -2,6 +2,7 @@ package com.example.morgan.lasertang;
 
 import android.app.ListActivity;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.content.BroadcastReceiver;
 import android.os.Bundle;
@@ -12,12 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -65,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Log.d(LOG, adapter.getItem(position));
-                switch(position){
+                switch (position) {
                     case 0:
                         Intent intent = new Intent(SettingsActivity.this, StoreActivity.class);
                         startActivityForResult(intent, 1);
@@ -74,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     @Override
@@ -109,4 +113,6 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
     }
+
+
 }
