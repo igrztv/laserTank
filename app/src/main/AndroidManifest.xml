@@ -20,6 +20,7 @@
         <activity
             android:name=".SearchActivity"
             android:label="Поиск"
+            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -27,7 +28,8 @@
         </activity>
         <activity
             android:name=".InviteActivity"
-            android:screenOrientation="portrait"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -50,17 +52,15 @@
         <activity
             android:name=".StoreActivity"
             android:label="@string/title_activity_store"
-            android:screenOrientation="portrait"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <service
             android:name=".BTService"
             android:enabled="true"
             android:exported="false" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <activity
             android:name="com.vk.sdk.VKServiceActivity"
             android:label="ServiceActivity"
@@ -77,7 +77,7 @@
         <activity
             android:name=".SideActivity"
             android:label="@string/title_activity_side"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

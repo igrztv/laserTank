@@ -1,5 +1,6 @@
 package com.example.morgan.lasertang;
 
+import android.content.Context;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,7 +28,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class StoreActivity extends AppCompatActivity {
+public class StoreActivity extends SideActivity {
 
     static String LOG = "STORE_ACTIVITY_LOG";
 
@@ -87,7 +88,11 @@ public class StoreActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_store);
+
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        //inflate your activity layout here!
+        View contentView = inflater.inflate(R.layout.activity_store, null, false);
+        drawer.addView(contentView, 0);
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);

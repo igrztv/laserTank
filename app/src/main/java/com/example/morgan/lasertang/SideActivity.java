@@ -65,14 +65,12 @@ public class SideActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.side, menu);
+//        getMenuInflater().inflate(R.menu.side, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        Log.d(LOG, "onOptionsItemSelected");
 
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -94,18 +92,20 @@ public class SideActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-            Log.d(LOG, "nav_gallery");
-        } else if (id == R.id.nav_slideshow) {
-            Log.d(LOG, "nav_slideshow");
-        } else if (id == R.id.nav_manage) {
-            Log.d(LOG, "nav_manage");
-        } else if (id == R.id.nav_share) {
-            Log.d(LOG, "nav_share");
-        } else if (id == R.id.nav_send) {
-            Log.d(LOG, "nav_send");
+        if (id == R.id.nav_game) {
+            Log.d(LOG, "nav_game");
+        } else if (id == R.id.nav_connection) {
+            Log.d(LOG, "nav_connection");
+        } else if (id == R.id.nav_store) {
+            Log.d(LOG, "nav_store");
+        } else if (id == R.id.nav_search) {
+            Log.d(LOG, "nav_search");
+        } else if (id == R.id.nav_login) {
+            Log.d(LOG, "nav_login");
+        } else if (id == R.id.nav_invite) {
+            Log.d(LOG, "nav_invite");
+        } else if (id == R.id.nav_reference) {
+            Log.d(LOG, "nav_reference");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

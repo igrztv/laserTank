@@ -33,7 +33,7 @@ public class SettingsActivity extends SideActivity implements View.OnClickListen
             "В бой!", "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться", "меню"
     };
     final static String[] motor_comment = new String[] {
-            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", "", "меню"
+            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", "+10 секунд ускорения", "меню"
     };
 
     static Boolean[] motor_cB = new Boolean[] {false, false, true, true, false, false};
