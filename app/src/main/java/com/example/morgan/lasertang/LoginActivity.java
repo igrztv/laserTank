@@ -202,7 +202,7 @@ public class LoginActivity extends BaseSocialActivity {
 
 
     private void goToPlayView() {
-        Intent intent = new Intent(LoginActivity.this, SearchActivity.class);
+        Intent intent = new Intent(LoginActivity.this, InviteActivity.class);
         startActivity(intent);
     }
 

@@ -2,9 +2,12 @@ package com.example.morgan.lasertang;
 
 
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
@@ -22,6 +25,10 @@ import com.vk.sdk.api.VKError;
 import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
+import com.vk.sdk.api.model.VKApiPhoto;
+import com.vk.sdk.api.model.VKPhotoArray;
+import com.vk.sdk.api.photo.VKImageParameters;
+import com.vk.sdk.api.photo.VKUploadImage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +43,7 @@ public class InviteActivity extends BaseSocialActivity {
 
     private static final String[] vkScope = new String[]{
             VKScope.WALL,
+            VKScope.PHOTOS
     };
 
     @Override
@@ -110,16 +118,40 @@ public class InviteActivity extends BaseSocialActivity {
     };
 
 
+    private Bitmap getWallPhoto() {
+        return BitmapFactory.decodeResource(getApplicationContext().getResources(), R.drawable.tank_avatar);
+    }
     private void postToVkWall() {
-        VKRequest request = VKApi.wall().post(
-                VKParameters.from(VKApiConst.USER_ID,
-                        "-1",
-                        VKApiConst.MESSAGE,
-                        getResources().getString(R.string.wall_invitation)));
+        VKRequest request = VKApi.uploadWallPhotoRequest(new VKUploadImage(getWallPhoto(), VKImageParameters.jpgImage(0.9f)), 0, 0);
         requestInProgressDialog.show();
-        request.executeWithListener(vkRequestListener);
+        request.executeWithListener(new VKRequest.VKRequestListener() {
+            @Override
+            public void onComplete(VKResponse response) {
+                VKApiPhoto photoModel = ((VKPhotoArray) response.parsedModel).get(0);
+                //Toast.makeText(InviteActivity.this, "ID: " + photoModel.getId(), Toast.LENGTH_LONG).show();
+                doPost(photoModel);
+                //Make post with photo
+            }
+            @Override
+            public void onError(VKError error) {
+                //Toast.makeText(InviteActivity.this, "ERROR: " + error.toString(), Toast.LENGTH_LONG).show();
+                doPost(null);
+            }
+        });
     }
 
+    private void doPost(VKApiPhoto photo) {
+        VKParameters vkParams = VKParameters.from(VKApiConst.USER_ID,
+                "-1",
+                VKApiConst.MESSAGE,
+                getResources().getString(R.string.wall_invitation));
+        if (photo != null) {
+            //Toast.makeText(InviteActivity.this, "PHOTO URL: photo" + photo.owner_id + "_" + photo.getId(), Toast.LENGTH_LONG).show();
+            vkParams.put(VKApiConst.ATTACHMENTS, "photo" + photo.owner_id + "_" + photo.getId());
+        }
+        VKRequest request = VKApi.wall().post(vkParams);
+        request.executeWithListener(vkRequestListener);
+    }
     private boolean canPostToVk() {
         return (permissionsFlag & VK_WALL_PERMISSION) != 0;
     }
