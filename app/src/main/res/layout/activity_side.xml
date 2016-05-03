@@ -25,19 +25,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/wrapper">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/imageView3" />
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/activity_content"
-            android:layout_marginTop="60dp">
-        </FrameLayout>
+        android:id="@+id/activity_content"
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/imageView3">
     </RelativeLayout>
 
 </android.support.v4.widget.DrawerLayout>
