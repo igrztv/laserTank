@@ -27,13 +27,7 @@
         </menu>
     </item>
 
-    <item android:title=""
-        android:titleCondensed="Разработчикам">
-        <menu>
-            <item
-                android:id="@+id/nav_reference"
-                android:title="Справка" />
-        </menu>
-    </item>
+    <item android:title="Справка"
+        android:id="@+id/nav_reference" />
 
 </menu>

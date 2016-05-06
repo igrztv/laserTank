@@ -1,5 +1,6 @@
 package com.example.morgan.lasertang;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -17,6 +18,7 @@ public class SideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     protected DrawerLayout drawer;
+    NavigationView navigationView;
 
     String LOG = "MENU BLYA";
 
@@ -28,6 +30,10 @@ public class SideActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             public void onDrawerClosed(View view) {
@@ -40,16 +46,12 @@ public class SideActivity extends AppCompatActivity
                 drawer.bringToFront();
                 drawer.requestLayout();
 
-                NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
                 navigationView.bringToFront();
                 navigationView.requestLayout();
             }
         };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -98,6 +100,8 @@ public class SideActivity extends AppCompatActivity
             Log.d(LOG, "nav_connection");
         } else if (id == R.id.nav_store) {
             Log.d(LOG, "nav_store");
+            Intent intent = new Intent(SideActivity.this, StoreActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_search) {
             Log.d(LOG, "nav_search");
         } else if (id == R.id.nav_login) {
