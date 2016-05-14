@@ -33,13 +33,13 @@ public class SettingsActivity extends SideActivity implements View.OnClickListen
     public static SettingsListAdapter adapter;
 
     final static String[] motor_item = new String[] {
-            "В бой!", "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться", "меню"
+            "В бой!", "Прокачать в магазине", "Использование сенсоров", "Органы управления", "Похвастаться"
     };
     final static String[] motor_comment = new String[] {
-            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", "+10 секунд ускорения", "меню"
+            "", "", "Управление с помощью гироскопа", "Руль слева, башня справа", "+10 секунд ускорения"
     };
 
-    static Boolean[] motor_cB = new Boolean[] {false, false, true, true, false, false};
+    static Boolean[] motor_cB = new Boolean[] {false, false, true, true, false};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

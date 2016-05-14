@@ -28,7 +28,7 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
-public class StoreActivity extends SideActivity {
+public class StoreActivity extends AppCompatActivity {
 
     static String LOG = "STORE_ACTIVITY_LOG";
 
@@ -89,10 +89,11 @@ public class StoreActivity extends SideActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        //inflate your activity layout here!
-        View contentView = inflater.inflate(R.layout.activity_store, null, false);
-        drawer.addView(contentView, 0);
+//        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        //inflate your activity layout here!
+//        View contentView = inflater.inflate(R.layout.activity_store, null, false);
+//        drawer.addView(contentView, 0);
+        setContentView(R.layout.activity_store);
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // setSupportActionBar(toolbar);

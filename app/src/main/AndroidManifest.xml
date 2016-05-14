@@ -48,7 +48,6 @@
         <activity
             android:name=".StoreActivity"
             android:label="@string/title_activity_store"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" />
         <service
             android:name=".BTService"
