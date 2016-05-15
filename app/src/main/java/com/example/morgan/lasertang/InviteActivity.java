@@ -1,11 +1,13 @@
 package com.example.morgan.lasertang;
 
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -51,6 +53,11 @@ public class InviteActivity extends BaseSocialActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invite);
+
+//        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        //inflate your activity layout here!
+//        View contentView = inflater.inflate(R.layout.activity_invite, null, false);
+//        drawer.addView(contentView, 0);
 
         AppCompatButton vk_button = (AppCompatButton) findViewById(R.id.invite_vk);
         AppCompatButton fb_button = (AppCompatButton) findViewById(R.id.invite_fb);
