@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_game"
+            android:title="В игру" />
+        <item
+            android:id="@+id/nav_connection"
+            android:title="Отключиться" />
+        <item
+            android:id="@+id/nav_store"
+            android:title="Апгрейд танка" />
+        <item
+            android:id="@+id/nav_search"
+            android:title="Поиск" />
+    </group>
+
+    <item android:title="Социалки">
+        <menu>
+            <item
+                android:id="@+id/nav_login"
+                android:title="Войти" />
+            <item
+                android:id="@+id/nav_invite"
+                android:title="Пригласить друзей" />
+        </menu>
+    </item>
+
+    <item android:title="Справка"
+        android:id="@+id/nav_reference" />
+
+</menu>

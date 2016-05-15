@@ -17,4 +17,8 @@
     <dimen name="store_header_padding_left">50dp</dimen>
     <dimen name="store_text_size">15sp</dimen>
     <dimen name="store_comment_size">13sp</dimen>
+
+    <dimen name="list_item_title">20sp</dimen>
+    <dimen name="list_item_subtitle">15sp</dimen>
+    <dimen name="list_item_height">50dp</dimen>
 </resources>
