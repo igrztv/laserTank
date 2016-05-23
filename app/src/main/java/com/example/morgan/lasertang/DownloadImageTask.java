@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -13,6 +14,7 @@ import java.io.InputStream;
  */
 public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
     ImageView bmImage;
+    private final String CACHED_FILENAME = "avatar";
 
     public DownloadImageTask(ImageView bmImage) {
         this.bmImage = bmImage;
@@ -20,18 +22,28 @@ public class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
 
     protected Bitmap doInBackground(String... urls) {
         String urldisplay = urls[0];
-        Bitmap mIcon11 = null;
-        try {
-            InputStream in = new java.net.URL(urldisplay).openStream();
-            mIcon11 = BitmapFactory.decodeStream(in);
-        } catch (Exception e) {
-            Log.e("Error", e.getMessage());
-            e.printStackTrace();
+        ImageCache cache = new ImageCache();
+        Bitmap mIcon =  cache.getBitmapFromDiskCache(CACHED_FILENAME);
+
+        if (mIcon == null) {
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
         }
-        return mIcon11;
+        try {
+            cache.addBitmapToCache(CACHED_FILENAME, mIcon);
+        } catch (IOException e) {
+            //do nothing;
+        }
+        return mIcon;
     }
 
     protected void onPostExecute(Bitmap result) {
+        if (bmImage == null) { return; }
         bmImage.setImageBitmap(result);
     }
 }
