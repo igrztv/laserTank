@@ -26,50 +26,28 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.w3c.dom.Text;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StoreActivity extends AppCompatActivity {
 
     static String LOG = "STORE_ACTIVITY_LOG";
 
-    final static String[] motor_item = new String[] {
-            "Комплект шасси и гусениц", "Аккумуляторы 2100 мАч", "Быстрые двигатели"
-    };
-    final static String[] motor_comment = new String[] {
-            "улучшенное цепление", "супердолгие", "большое передаточное отношение"
-    };
-    static Integer[] motor_img={
-            R.drawable.wheel,
-            R.drawable.battery,
-            R.drawable.engine
-    };
-
-    final static String[] armor_item = new String[] {
-            "Васька", "Томасина", "Пушок", "Дымка"
-    };
-    final static String[] armor_comment = new String[] {
-            "Кузя", "Китти", "Масяня", "Симба"
-    };
-    static Integer[] armor_img={
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank
-    };
-
-    final static String[] weapon_item = new String[] {
-            "Кузя", "Китти", "Масяня", "Симба"
-    };
-    final static String[] weapon_comment = new String[] {
-            "Рыжик", "Барсик", "Мурзик", "Мурка"
-    };
-    static Integer[] weapon_img = {
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank,
-            R.drawable.tank
-    };
-
+    final static List<String> start_item = new ArrayList<String>();
+    final static List<String> start_comment = new ArrayList<String>();
+    static List<String> start_img = new ArrayList<String>();
+    static List<String> start_link = new ArrayList<String>();
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -87,22 +65,13 @@ public class StoreActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
-//        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        //inflate your activity layout here!
-//        View contentView = inflater.inflate(R.layout.activity_store, null, false);
-//        drawer.addView(contentView, 0);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // setSupportActionBar(toolbar);
 
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
@@ -113,101 +82,30 @@ public class StoreActivity extends AppCompatActivity {
                         // When swiping between pages, select the
                         // corresponding tab.
                         // getActionBar().setSelectedNavigationItem(position);
-                        Log.d(LOG, "position = " + position);
                         switch (position) {
                             case 0:
-                                adapter.setData(motor_item, motor_comment, motor_img);
+                                adapter.setData(1);
                                 adapter.notifyDataSetChanged();
                                 break;
                             case 1:
-                                adapter.setData(armor_item,armor_comment,armor_img);
+                                adapter.setData(2);
                                 adapter.notifyDataSetChanged();
                                 break;
                             case 2:
-                                adapter.setData(weapon_item,weapon_comment,weapon_img);
+                                adapter.setData(3);
                                 adapter.notifyDataSetChanged();
                                 break;
-                            default: break;
+                            default:
+                                break;
                         }
                     }
                 });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-        adapter = new CustomListAdapter(this, motor_item, motor_comment, motor_img);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
-
-//        listView.setOnItemClickListener(new OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//
-//            }
-//        });
-
-//        // верхние вкладки
-//        TextView motor = (TextView) findViewById(R.id.StoreMotor);
-//        TextView armot = (TextView) findViewById(R.id.StoreArmor);
-//        TextView weapon = (TextView) findViewById(R.id.StoreWeapon);
-//        motor.setOnClickListener(motorCategory);
-//        armot.setOnClickListener(armorCategory);
-//        weapon.setOnClickListener(weaponCategory);
+        adapter = new CustomListAdapter(this, start_item, start_comment, start_img, start_link);
+        new json_loader(adapter).execute("http://95.213.236.218:8000/api/get/");
     }
-
-//    View.OnClickListener motorCategory = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            adapter.setData(motor_item,motor_comment,motor_img);
-//            adapter.notifyDataSetChanged();
-//        }
-//    };
-//
-//    View.OnClickListener armorCategory = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            adapter.setData(armor_item,armor_comment,armor_img);
-//            adapter.notifyDataSetChanged();
-//        }
-//    };
-//
-//    View.OnClickListener weaponCategory = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            adapter.setData(weapon_item,weapon_comment,weapon_img);
-//            adapter.notifyDataSetChanged();
-//        }
-//    };
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_store, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -240,6 +138,13 @@ public class StoreActivity extends AppCompatActivity {
             View rootView = inflater.inflate(R.layout.fragment_store, container, false);
             ListView listView = (ListView)rootView.findViewById(R.id.listView1);
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View view,
+                                        int position, long id) {
+                    //(TextView) view.findViewById(R.id.store_item_comment)
+//                    String link = view.getParent().getAdapter.get_link(position);
+                }
+            });
             return rootView;
         }
     }
@@ -273,9 +178,9 @@ public class StoreActivity extends AppCompatActivity {
                 case 0:
                     return "Ходовая";
                 case 1:
-                    return "Орудия";
-                case 2:
                     return "Броня";
+                case 2:
+                    return "Орудия";
             }
             return null;
         }
