@@ -26,60 +26,78 @@
         android:id="@+id/shoot_btn"
         android:text="@string/shoot_btn"
         android:background="@color/red"
-        android:layout_alignTop="@+id/turretLeft"
+        android:textSize="35dp"
+        android:padding="10dp"
+        android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/turretLeft"
         android:layout_toEndOf="@+id/turretLeft"
-        android:textSize="35dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:visibility="invisible"
-        android:layout_centerVertical="true" />
+        android:visibility="visible"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView2"
-        android:layout_above="@+id/textView"
+        android:visibility="visible"
+        android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:visibility="invisible" />
+        android:layout_marginLeft="57dp"
+        android:layout_marginStart="57dp" />
 
     <ZoomButton
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/turretRight"
         android:src="@drawable/turret_right"
-        android:layout_alignBottom="@+id/shoot_btn"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_alignTop="@+id/turretLeft"
         android:layout_toRightOf="@+id/shoot_btn"
-        android:layout_toEndOf="@+id/shoot_btn" />
+        android:layout_toEndOf="@+id/shoot_btn"
+        android:visibility="invisible" />
 
     <ZoomButton
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/turretLeft"
         android:src="@drawable/turret_left"
-        android:layout_alignBottom="@+id/moveBtnSpace"
-        android:layout_marginLeft="50dp"
-        android:layout_marginBottom="50dp" />
+        android:layout_alignTop="@+id/move_btn"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="132px"
         android:layout_height="132px"
         android:id="@+id/move_btn"
         android:src="@drawable/joystick2"
-        android:layout_marginRight="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_alignRight="@+id/moveBtnSpace"
-        android:layout_alignEnd="@+id/moveBtnSpace" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/moveBtnSpace"
+        android:layout_alignStart="@+id/moveBtnSpace"
+        android:layout_marginLeft="69dp"
+        android:layout_marginStart="69dp" />
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:id="@+id/imageView5"
+        android:src="@drawable/a_logo"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
 
 </RelativeLayout>
